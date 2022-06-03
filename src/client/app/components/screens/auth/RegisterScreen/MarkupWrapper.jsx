@@ -14,18 +14,18 @@ const MarkupWrapper = ({ children }) => {
         <div className={`${styles.container} ${styles['container--screen_registration']}`}>
           <div className={styles['outer-box']}>
             <div className={styles['inner-box']}>
-              <h1>Join Fedium.</h1>
-              <h2>Create an account to personalize your homepage, follow your favorite authors and publications, applaud stories you love, and more.</h2>
+              <h1>Fedium'га кошул</h1>
+              <h2>Кирип, артыкчылыктарга ээ болуңуз</h2>
 
               {children}
 
               <div className={styles.account}>
-                Already have an account?
+              Аккаунтуңуз барбы?
                 {' '}
-                <Link to={`/login?redirectUrl=${encodedRedirectUrl}`}>Sign in</Link>.
+                <Link to={`/login?redirectUrl=${encodedRedirectUrl}`}>Кирүү</Link>.
               </div>
               <div className={styles.terms}>
-                To make original Medium work, they(Medium team) log user data and share it with service providers. Click "Sign up" above to accept Medium’s
+                
                 {' '}
                 <a href="https://medium.com/policy/medium-terms-of-service-9db0094a1e0f" target="_blank" rel="noopener noreferrer">
                   Terms of Service

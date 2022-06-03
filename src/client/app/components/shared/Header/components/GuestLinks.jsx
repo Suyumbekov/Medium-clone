@@ -9,8 +9,10 @@ const GuestLinks = () => {
 
   return (
     <div className={styles.guest}>
-      <Link className={styles['sign-in']} to={`/login?redirectUrl=${encodedRedirectUrl}`}>Sign in</Link>
-      <Link className="btn" to={`/register?redirectUrl=${encodedRedirectUrl}`}>Get started</Link>
+      <Link className={styles['sign-in']} to={`/blogs/1`}>Макалалар</Link>
+      <Link className={styles['sign-in']} to={`/login?redirectUrl=${encodedRedirectUrl}`}>Вакансиялар</Link>
+      <Link className={styles['sign-in']} to={`/login?redirectUrl=${encodedRedirectUrl}`}>Кирүү</Link>
+      <Link className="btn" to={`/register?redirectUrl=${encodedRedirectUrl}`}>Катталуу</Link>
     </div>
   );
 };

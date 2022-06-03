@@ -66,11 +66,11 @@ class RegisterScreen extends React.Component {
     return (
       <MarkupWrapper>
         <form onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.username} onChange={this.handleInputChange} name="username" placeholder="Username" required />
-          <input type="password" value={this.state.password} onChange={this.handleInputChange} name="password" placeholder="Password" required />
-          <input type="password" value={this.state.confirmPassword} onChange={this.handleInputChange} name="confirmPassword" placeholder="Confirm Password" required />
+          <input type="text" value={this.state.username} onChange={this.handleInputChange} name="username" placeholder="Колдонуучу аты" required />
+          <input type="password" value={this.state.password} onChange={this.handleInputChange} name="password" placeholder="Сыр сөз" required />
+          <input type="password" value={this.state.confirmPassword} onChange={this.handleInputChange} name="confirmPassword" placeholder="Сыр сөз" required />
           <div className={styles['button-box']}>
-            <button className="btn btn--inverted">Sign up</button>
+            <button className="btn btn--inverted">Катталуу</button>
           </div>
           {this.state.error && errorBox}
         </form>

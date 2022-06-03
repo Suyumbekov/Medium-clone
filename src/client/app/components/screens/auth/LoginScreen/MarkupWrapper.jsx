@@ -13,15 +13,15 @@ const MarkupWrapper = ({ children }) => {
       <div className={styles.container}>
         <div className={styles['outer-box']}>
           <div className={styles['inner-box']}>
-            <h1>Welcome back.</h1>
-            <h2>Sign in to access your personalized homepage, follow authors and topics you love, and clap for stories that matter to you.</h2>
+            <h1>Кош келдиңиз</h1>
+            <h2>Кирип, артыкчылыктарга ээ болуңуз</h2>
 
             {children}
 
             <div className={styles.account}>
-              No account?
+              Аккаунт жокпу?
               {' '}
-              <Link to={`/register?redirectUrl=${encodedRedirectUrl}`}>Create one</Link>.
+              <Link to={`/register?redirectUrl=${encodedRedirectUrl}`}>Катталуу</Link>.
             </div>
             <div className={styles.terms}>
               To make original Medium work, they(Medium team) log user data and share it with service providers. Click "Sign in" above to accept Medium’s
