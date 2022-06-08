@@ -3,10 +3,7 @@
   "version": "0.1.0",
   "description": "Yet another clone of medium.com",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Gizzz/medium-clone.git"
-  },
+  
   "engines": {
     "node": "8.11.1",
     "npm": "5.6.0"
