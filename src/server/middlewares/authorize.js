@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 //
 const config = require('../config');
-const db = require('../db');
+const db = require('../db/db');
 
 const authorize = (req, res, next) => {
   if (!req.headers.authorization) {
@@ -11,10 +11,14 @@ const authorize = (req, res, next) => {
 
   const token = req.headers.authorization.slice('Bearer '.length);
 
-  const revokedToken = db
-    .get('revokedTokens')
-    .find({ token })
-    .value();
+    const revokedToken = db
+    .query('SELECT id FROM revokedTokens WHERE token = $1', [token], (err, res) => {
+        if(err){
+          throw err;
+        }
+    });
+    
+
 
   if (revokedToken) {
     res.status(400).json({ error: 'Auth token is revoked.' });
