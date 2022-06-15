@@ -11,11 +11,11 @@ class PostEditScreen_Container extends React.Component {
     window.scrollTo(0, 0);
 
     const { postId } = this.props.match.params;
-    const userId = 1;
+    const user_id = 1;
 
     Promise.all([
       fetch(`/api/posts/${postId}`).then((response) => response.json()),
-      fetch(`/api/users/${userId}`).then((response) => response.json()),
+      fetch(`/api/users/${user_id}`).then((response) => response.json()),
     ])
       .then((results) => {
         const post = results[0];
@@ -29,7 +29,7 @@ class PostEditScreen_Container extends React.Component {
 
   handleSave = () => {
     const { post } = this.state.data;
-    this.props.history.push(`/blogs/${post.blogId}/posts/${post.id}`);
+    this.props.history.push(`/blogs/${post.blog_id}/posts/${post.id}`);
   }
 
   render() {

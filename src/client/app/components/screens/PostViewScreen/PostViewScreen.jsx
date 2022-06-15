@@ -27,7 +27,7 @@ const PostViewScreen = ({ data }) => {
           <PostText post={post} />
         </section>
         <footer className={styles['post-footer']}>
-          <Link className="btn" to={`/blogs/${post.blogId}/posts/${post.id}/edit`}>
+          <Link className="btn" to={`/blogs/${post.blog_id}/posts/${post.id}/edit`}>
             Edit
           </Link>
         </footer>

@@ -7,22 +7,22 @@ const PostImage = ({ post }) => (
   <figure className={styles['post-image']}>
     <picture>
       <source
-        srcSet={`https://cdn-images-1.medium.com/max/400/${post.imgDescriptor} 1x, https://cdn-images-1.medium.com/max/800/${post.imgDescriptor} 2x`}
+        srcSet={`https://cdn-images-1.medium.com/max/400/${post.img_descriptor} 1x, https://cdn-images-1.medium.com/max/800/${post.img_descriptor} 2x`}
         media="(max-width: 400px)"
       />
       <source
-        srcSet={`https://cdn-images-1.medium.com/max/600/${post.imgDescriptor} 1x, https://cdn-images-1.medium.com/max/1200/${post.imgDescriptor} 2x`}
+        srcSet={`https://cdn-images-1.medium.com/max/600/${post.img_descriptor} 1x, https://cdn-images-1.medium.com/max/1200/${post.img_descriptor} 2x`}
         media="(min-width: 401px) and (max-width: 600px)"
       />
       <source
-        srcSet={`https://cdn-images-1.medium.com/max/800/${post.imgDescriptor} 1x, https://cdn-images-1.medium.com/max/1600/${post.imgDescriptor} 2x`}
+        srcSet={`https://cdn-images-1.medium.com/max/800/${post.img_descriptor} 1x, https://cdn-images-1.medium.com/max/1600/${post.img_descriptor} 2x`}
         media="(min-width: 601px) and (max-width: 800px)"
       />
       <source
-        srcSet={`https://cdn-images-1.medium.com/max/1600/${post.imgDescriptor} 1x, https://cdn-images-1.medium.com/max/3200/${post.imgDescriptor} 2x`}
+        srcSet={`https://cdn-images-1.medium.com/max/1600/${post.img_descriptor} 1x, https://cdn-images-1.medium.com/max/3200/${post.img_descriptor} 2x`}
         media="(min-width: 801px)"
       />
-      <img src={`https://cdn-images-1.medium.com/max/1600/${post.imgDescriptor}`} />
+      <img src={`https://cdn-images-1.medium.com/max/1600/${post.img_descriptor}`} />
     </picture>
   </figure>
 );

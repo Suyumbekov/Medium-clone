@@ -1,7 +1,7 @@
 const _ = require('lodash');
 
 function userToJson(user) {
-  const safeUser = _.omit(user, ['passwordHash']);
+  const safeUser = _.omit(user, ['password_hash']);
   return safeUser;
 }
 

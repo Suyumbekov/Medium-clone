@@ -14,9 +14,9 @@ class PostEditScreen extends React.Component {
     isDataLoaded: false,
     formData: {
       title: '',
-      subTitle: '',
-      imgDescriptor: '',
-      isLargePreview: false,
+      subtitle: '',
+      img_descriptor: '',
+      is_large_preview: false,
     },
   }
 
@@ -65,9 +65,9 @@ class PostEditScreen extends React.Component {
       isDataLoaded: true,
       formData: {
         title: post.title,
-        subTitle: post.subTitle,
-        imgDescriptor: post.imgDescriptor,
-        isLargePreview: post.isLargePreview,
+        subtitle: post.subtitle,
+        img_descriptor: post.img_descriptor,
+        is_large_preview: post.is_large_preview,
       },
     });
   }
@@ -89,7 +89,7 @@ class PostEditScreen extends React.Component {
     this.setState({
       formData: {
         ...this.state.formData,
-        isLargePreview: e.target.checked,
+        is_large_preview: e.target.checked,
       },
     });
   }
@@ -104,7 +104,7 @@ class PostEditScreen extends React.Component {
       },
       body: JSON.stringify({
         ...this.state.formData,
-        contentMarkup: document.querySelector('.js-editable').innerHTML,
+        content_markup: document.querySelector('.js-editable').innerHTML,
       }),
     })
       .then(() => { this.props.onSave(); });
@@ -123,7 +123,7 @@ class PostEditScreen extends React.Component {
         <div className={styles['post-meta']}>
           <div className={styles['user-info']}>
             <a className="avatar avatar--middle avatar--circled" href="#">
-              <img src={author.avatarUrl} />
+              <img src={author.avatar_url} />
             </a>
             <a className={styles.author} href="#">{author.username}</a>
           </div>
@@ -133,10 +133,10 @@ class PostEditScreen extends React.Component {
             onCheckboxChange={this.handleCheckboxChange}
           />
         </div>
-        <div className={`${postTextStyles['post-text']} js-editable`} dangerouslySetInnerHTML={{ __html: post.contentMarkup }} />
+        <div className={`${postTextStyles['post-text']} js-editable`} dangerouslySetInnerHTML={{ __html: post.content_markup }} />
         <div className={styles['post-actions']}>
           <button className="btn" onClick={this.handleSaveBtnClick}>Save</button>
-          <Link className={styles.cancel} to={`/blogs/${post.blogId}/posts/${post.id}`}>Cancel</Link>
+          <Link className={styles.cancel} to={`/blogs/${post.blog_id}/posts/${post.id}`}>Cancel</Link>
         </div>
       </main>
     );

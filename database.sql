@@ -24,11 +24,11 @@ ALTER TABLE IF EXISTS public.users
 CREATE TABLE IF NOT EXISTS public.blogs
 (
     id integer NOT NULL DEFAULT nextval('blogs_id_seq'::regclass),
-    "userId" integer NOT NULL,
+    "user_id" integer NOT NULL,
     name character varying COLLATE pg_catalog."default" NOT NULL,
     description character varying COLLATE pg_catalog."default",
     CONSTRAINT blogs_pkey PRIMARY KEY (id),
-    CONSTRAINT "userId" FOREIGN KEY ("userId")
+    CONSTRAINT "user_id" FOREIGN KEY ("user_id")
         REFERENCES public.users (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
@@ -47,22 +47,22 @@ ALTER TABLE IF EXISTS public.blogs
 CREATE TABLE IF NOT EXISTS public.posts
 (
     id integer NOT NULL DEFAULT nextval('posts_id_seq'::regclass),
-    "blogId" integer NOT NULL,
-    "userId" integer NOT NULL,
+    "blog_id" integer NOT NULL,
+    "user_id" integer NOT NULL,
     title character varying COLLATE pg_catalog."default" NOT NULL,
     subtitle character varying COLLATE pg_catalog."default",
-    "contentMarkup" text COLLATE pg_catalog."default" NOT NULL,
-    "isLargePreview" boolean NOT NULL,
-    "imgDescriptor" character varying COLLATE pg_catalog."default" NOT NULL,
+    "content_markup" text COLLATE pg_catalog."default" NOT NULL,
+    "is_large_preview" boolean NOT NULL,
+    "img_descriptor" character varying COLLATE pg_catalog."default" NOT NULL,
     date character varying COLLATE pg_catalog."default",
-    "readTimeEstimate" character varying COLLATE pg_catalog."default",
+    "read_time_estimate" character varying COLLATE pg_catalog."default",
     CONSTRAINT "post-id" PRIMARY KEY (id),
-    CONSTRAINT "blogId" FOREIGN KEY ("blogId")
+    CONSTRAINT "blog_id" FOREIGN KEY ("blog_id")
         REFERENCES public.blogs (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID,
-    CONSTRAINT "userId" FOREIGN KEY ("userId")
+    CONSTRAINT "user_id" FOREIGN KEY ("user_id")
         REFERENCES public.users (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
@@ -73,21 +73,21 @@ TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public.posts
     OWNER to postgres;
--- Index: fki_blogId
+-- Index: fki_blog_id
 
--- DROP INDEX IF EXISTS public."fki_blogId";
+-- DROP INDEX IF EXISTS public."fki_blog_id";
 
-CREATE INDEX IF NOT EXISTS "fki_blogId"
+CREATE INDEX IF NOT EXISTS "fki_blog_id"
     ON public.posts USING btree
-    ("blogId" ASC NULLS LAST)
+    ("blog_id" ASC NULLS LAST)
     TABLESPACE pg_default;
--- Index: fki_userId
+-- Index: fki_user_id
 
--- DROP INDEX IF EXISTS public."fki_userId";
+-- DROP INDEX IF EXISTS public."fki_user_id";
 
-CREATE INDEX IF NOT EXISTS "fki_userId"
+CREATE INDEX IF NOT EXISTS "fki_user_id"
     ON public.posts USING btree
-    ("userId" ASC NULLS LAST)
+    ("user_id" ASC NULLS LAST)
     TABLESPACE pg_default;
 
     -- Table: public.revoked_tokens

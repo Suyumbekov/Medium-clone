@@ -4,16 +4,16 @@ import PropTypes from 'prop-types';
 import styles from './InputFields.module.scss';
 
 const InputFields = ({ inputData, onInputChange, onCheckboxChange }) => {
-  const { title, subTitle, imgDescriptor, isLargePreview } = inputData;
+  const { title, subtitle, img_descriptor, is_large_preview } = inputData;
 
   return (
     <div className={styles['input-fields']}>
       <div>
-        <input type="text" className={styles['img-url']} name="imgDescriptor" placeholder="Image descriptor for url" value={imgDescriptor} onChange={onInputChange} />
+        <input type="text" className={styles['img-url']} name="img_descriptor" placeholder="Image descriptor for url" value={img_descriptor} onChange={onInputChange} />
       </div>
       <div className={styles['is-large-preview']}>
         <label>
-          <input type="checkbox" checked={isLargePreview} onChange={onCheckboxChange} />
+          <input type="checkbox" checked={is_large_preview} onChange={onCheckboxChange} />
           Enable large preview
         </label>
       </div>
@@ -21,7 +21,7 @@ const InputFields = ({ inputData, onInputChange, onCheckboxChange }) => {
         <input type="text" className={styles.title} name="title" placeholder="Title" value={title} onChange={onInputChange} />
       </div>
       <div>
-        <input type="text" className={styles.subtitle} name="subTitle" placeholder="Subtitle" value={subTitle} onChange={onInputChange} />
+        <input type="text" className={styles.subtitle} name="subtitle" placeholder="subtitle" value={subtitle} onChange={onInputChange} />
       </div>
     </div>
   );

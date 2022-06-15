@@ -6,7 +6,7 @@ import styles from './PostHeader.module.scss';
 const PostHeader = ({ post, author }) => (
   <header className={styles['post-header']}>
     <a className="avatar avatar--big avatar--circled" href="https://blog.kentcdodds.com/@kentcdodds" target="_blank" rel="noopener noreferrer">
-      <img src={author.avatarUrl} />
+      <img src={author.avatar_url} />
     </a>
     <div className={styles.text}>
       <div className={styles.title}>
@@ -17,7 +17,7 @@ const PostHeader = ({ post, author }) => (
       </div>
       <div className={styles.descr}>{author.bio}</div>
       <div className={styles.meta}>
-        {post.date} · {post.readTimeEstimate}
+        {post.date} · {post.read_time_estimate}
       </div>
     </div>
   </header>

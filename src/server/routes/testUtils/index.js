@@ -33,7 +33,7 @@ const createUserInDb = async (userCredentials = {}, overrides = {}) => {
       id: maxUserId + 1,
       username,
       passwordHash,
-      avatarUrl: 'https://cdn-images-1.medium.com/fit/c/120/120/0*cmAOkoH29zoIVIBT',
+      avatar_url: 'https://cdn-images-1.medium.com/fit/c/120/120/0*cmAOkoH29zoIVIBT',
       bio: '',
       ...overrides,
     })

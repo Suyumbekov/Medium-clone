@@ -1,14 +1,16 @@
-const path = require('path');
-const lowdb = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync');
-const lodashId = require('lodash-id');
+const { Pool } = require('pg')
 
-const dbFile = process.env.NODE_ENV === 'test'
-  ? 'test-db-data.json'
-  : 'db-data.json';
+const pool = new Pool({
+    user: 'postgres',
+    password: 'root',
+    database: 'blog',
+    host: 'localhost',
+    port: 5432
+});
 
-const adapter = new FileSync(path.resolve(__dirname, dbFile));
-const db = lowdb(adapter);
-db._.mixin(lodashId);
+pool.on('error', (err, client) => {
+    console.error('Unexpected error on idle client', err)
+    process.exit(-1)
+  })
 
-module.exports = db;
+module.exports = pool;

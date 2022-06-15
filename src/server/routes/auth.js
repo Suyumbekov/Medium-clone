@@ -18,7 +18,7 @@ router.post('/register', async (req, res) => {
   });
   reqBody.username = reqBody.username ? reqBody.username.trim() : reqBody.username;
 
-  const validationResult = validateRegistrationData(reqBody);
+  const validationResult = await validateRegistrationData(reqBody);
   if (!validationResult.isValid) {
     res.status(400).json({ error: validationResult.error });
     return;
@@ -42,17 +42,16 @@ router.post('/login', async (req, res) => {
     return;
   }
 
-  const user = db
-    .get('users')
-    .find({ username: req.body.username })
-    .value();
+  const user = await db
+    .query('SELECT * FROM users WHERE username = $1', [req.body.username])
+    .then(resp => resp.rows[0] );
 
   if (!user) {
     res.status(404).json({ error: 'User not found. Check the username.' });
     return;
   }
 
-  const isPasswordCorrect = await bcrypt.compare(req.body.password, user.passwordHash);
+  const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password_hash);
   if (!isPasswordCorrect) {
     res.status(400).json({ error: 'Password is wrong.' });
     return;
@@ -68,34 +67,29 @@ router.post('/login', async (req, res) => {
   });
 });
 
-router.post('/logout', authorize, (req, res) => {
+router.post('/logout', authorize, async(req, res) => {
   // due to authorize middleware, assume that token exists and correct
   const token = req.headers.authorization.slice('Bearer '.length);
 
-  const existingToken = db
-    .get('revokedTokens')
-    .find({ token })
-    .value();
+  const existingToken = await db
+    .query('SELECT id FROM revoked_tokens WHERE token = $1', [token])
+    .then(resp => resp.rows[0]);
 
   if (!existingToken) {
     db
-      .get('revokedTokens')
-      .insert({
-        id: db._.createId(),
-        token,
-      })
-      .write();
+      .query('INSERT INTO revoked_tokens(token) VALUES($1) RETURNING id', [token])
+      .then((resp) => {
+        if(resp.rows[0])
+          res.json({ message: 'Token is revoked.' });
+      });
   }
-
-  res.json({ message: 'Token is revoked.' });
-
   // TODO: create job (monthly) for cleaning up expired revoked tokens from db
 });
 
 // ===========================================================================
 // helpers
 
-function validateRegistrationData(data) {
+async function validateRegistrationData(data) {
   if (!data.username || !data.password || !data.confirmPassword) {
     return { isValid: false, error: 'All fields are required.' };
   }
@@ -111,41 +105,26 @@ function validateRegistrationData(data) {
   if (data.password !== data.confirmPassword) {
     return { isValid: false, error: 'Password and confirmation do not match.' };
   }
+  return await db
+    .query('SELECT id FROM users WHERE username = $1', [data.username])
+    .then((res) => {
+      if(res.rows[0]){
+        return { isValid: false, error: 'This username is already taken.' };
+      }
+      return { isValid: true, error: null };
+    })
 
-  const existingUser = db
-    .get('users')
-    .find({ username: data.username })
-    .value();
-
-  if (existingUser) {
-    return { isValid: false, error: 'This username is already taken.' };
-  }
-
-  return { isValid: true, error: null };
 }
 
 async function createNewUser(username, password) {
-  const maxUserId = db
-    .get('users')
-    .value()
-    .map(user => user.id)
-    .reduce((acc, cur) => (cur > acc ? cur : acc));
-
   const saltRounds = 10;
   const passwordHash = await bcrypt.hash(password, saltRounds);
-
-  const newUser = db
-    .get('users')
-    .insert({
-      id: maxUserId + 1,
-      username,
-      passwordHash,
-      avatarUrl: 'https://cdn-images-1.medium.com/fit/c/120/120/0*cmAOkoH29zoIVIBT',
-      bio: '',
+  const result = db
+    .query('INSERT INTO users(username, password_hash, avatar_url) VALUES ($1, $2, $3) RETURNING *', [username, passwordHash, 'https://cdn-images-1.medium.com/fit/c/120/120/0*cmAOkoH29zoIVIBT'])
+    .then((resp) => {
+      return resp.rows[0];
     })
-    .write();
-
-  return newUser;
+    return result;
 }
 
 module.exports = router;

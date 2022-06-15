@@ -7,7 +7,7 @@ const PostText = ({ post }) => (
   <div className={postTextStyles['post-text']}>
     <h1 className={postTextStyles.title}>{post.title}</h1>
     <p><em>{post.subTitle}</em></p>
-    <div style={{ display: 'contents' }} dangerouslySetInnerHTML={{ __html: post.contentMarkup }} />
+    <div style={{ display: 'contents' }} dangerouslySetInnerHTML={{ __html: post.content_markup }} />
   </div>
 );
 

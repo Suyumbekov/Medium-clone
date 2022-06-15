@@ -8,12 +8,12 @@ class BlogScreen_Container extends React.Component {
     // non-container logic; should be in HOC or presenter component
     window.scrollTo(0, 0);
 
-    const blogId = 1;
-    const userId = 1;
+    const blog_id = 1;
+    const user_id = 1;
 
     Promise.all([
-      fetch(`/api/blogs/${blogId}`).then((response) => response.json()),
-      fetch(`/api/users/${userId}`).then((response) => response.json()),
+      fetch(`/api/blogs/${blog_id}`).then((response) => response.json()),
+      fetch(`/api/users/${user_id}`).then((response) => response.json()),
       fetch('/api/posts').then((response) => response.json()),
     ])
       .then((results) => {
