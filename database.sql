@@ -1,4 +1,4 @@
--- Branch test-reaction
+-- Branch testing-reaction
 -- Table: public.users
 
 -- DROP TABLE IF EXISTS public.users;
