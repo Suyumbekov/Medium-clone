@@ -20,7 +20,7 @@ router.get('/blogs/:id', (req, res) => {
 
 router.get('/users/:id', (req, res) => {
   const user = db
-    .query('SELECT * FROM users WHERE id = $1', [Number(req.params.id)])
+    .query('SELECT * FROM users WHERE id = $1', [Number(req.params.id)]);
 
   if (!user) {
     res.status(404).json({ error: 'Item not found.' });
